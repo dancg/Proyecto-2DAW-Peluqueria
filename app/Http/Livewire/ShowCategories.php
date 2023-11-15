@@ -62,7 +62,11 @@ class ShowCategories extends Component
             'color'=>$this->miCategory->color,
         ]);
         $this->miCategory = new Category;
-        $this->reset('openEditar');
-        $this->emit('mensaje', 'Categoría editada con éxito');
+        return redirect()->route("categorias.show")->with("info", "Categoría Actualizada");
+    }
+
+    // Función para cerrar la ventana modal si se pulsa el botón cancelar
+    public function cerrar(){
+        return redirect()->route("categorias.show");
     }
 }

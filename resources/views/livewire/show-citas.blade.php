@@ -35,7 +35,7 @@
         @if ($citas->count())
         <!--En este caso meto un overflow a la tabla ya que es demasiado grande, ahora al hacer scroll
         en modo móvil se moverá la tabla sin afectar a toda la página-->
-        <article style="overflow: auto">
+        <article style="overflow-hidden">
             <table id="citas"
                 class="display text-center dark:text-white border border-slate-700 bg-white rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
                 style="width:100%">

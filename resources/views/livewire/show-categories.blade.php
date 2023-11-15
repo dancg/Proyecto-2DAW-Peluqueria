@@ -35,7 +35,7 @@
             </div>
         </article>
         @if ($categorias->count())
-            <article style="overflow: auto">
+            <article style="overflow-hidden">
                 <table id="categorias"
                     class="display text-center dark:text-white border border-slate-700 bg-white rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
                     style="width:100%">
@@ -105,7 +105,7 @@
                 <x-slot name="footer">
                     <div class="flex flex-row-reverse">
                         <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                            wire:click="$set('openEditar', false)">
+                            wire:click="cerrar()">
                             <i class="fas fa-xmark mr-2"></i>Cancelar
                         </button>
                         <button class="mr-4 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
