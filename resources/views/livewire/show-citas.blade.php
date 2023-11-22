@@ -50,7 +50,7 @@
                 <tbody>
                     @foreach ($citas as $item)
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <td class="py-4 border border-slate-700 dark:border-slate-300">
+                            <td class="py-4 text-center border border-slate-700 dark:border-slate-300">
                                 <!--En la base de datos la fecha la tengo guardada con una T
                                 como separador, para que el usuario no vea la T me creo una variable
                                 en la que guardo la T y con el str_replace la elimino
@@ -61,10 +61,10 @@
                                 ?>
                                 {{ $item->fecha }}
                             </td>
-                            <td class="py-4 border border-slate-700 dark:border-slate-300">
+                            <td class="py-4 text-center border border-slate-700 dark:border-slate-300">
                                 {{ $item->tipo }}
                             </td>
-                            <td class="py-4 border border-slate-700 dark:border-slate-300">
+                            <td class="py-4 text-center border border-slate-700 dark:border-slate-300">
                                 {{ $item->user->name }}
                             </td>
                             <td class="py-4 border border-slate-700 dark:border-slate-300">

@@ -57,7 +57,7 @@
                                     @csrf
                                     @method('PUT')
                                     <input type="hidden" name="id" value="{{ $item->id }}">
-                                    <input type="number" min="1" max="{{ $item->article->stock }}"
+                                    <input type="number" min="1" max="{{ $item->article->stock + $item->cantidad }}"
                                         name="cantidad" value="{{ $item->cantidad }}"
                                         class="w-16 text-center h-6 text-gray-800 outline-none rounded border border-blue-600" />
                                     <button data-tooltip-target="tooltip-editar" title="Editar Cantidad"

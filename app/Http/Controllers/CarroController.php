@@ -66,7 +66,7 @@ class CarroController extends Controller
     {
         // dd($carro->article->stock);
         $request->validate([
-            'cantidad' => ['numeric', 'min:1', 'max:' . $carro->article->stock]
+            'cantidad' => ['numeric', 'min:1', 'max:' . $carro->article->stock + $carro->cantidad]
         ]);
         // Realizo esto para cambiar la cantidad del stock del artículo (Modelo Article)
         if ($carro->cantidad != $request->cantidad) {
