@@ -202,7 +202,39 @@
                 timer: 1500
             })
         @endif
+
+        //Alerta de Google
+        @if (session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: '{{ session('error') }}',
+                showConfirmButton: true,
+            })
+        @endif
+
+        //Alerta de Login
+        // Aquí creo una función javascript llamada copy para que me permita copiar la contraseña generada
+        // aleatoriamente para que el usuario la guarde por si borra o edita su cuenta
+        @if (session('login'))
+            Swal.fire({
+                icon: 'info',
+                title: "Su contraseña creada es: <br><i class='fa-solid fa-clipboard cursor-pointer mr-1' id='clipboard' onclick=\"copy(this, '{{session('login')}}')\"></i>{{ session('login') }}",
+                text: 'Este mensaje solo se mostrará una vez, cópialo en algún sitio',
+                showConfirmButton: true,
+            })
+        @endif
+    </script>
+    <script>
+        // Función copy para copiar contraseña
+    function copy(element, pass) {
+        const textarea = document.createElement('textarea');
+        textarea.value = pass;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        console.log('Contenido copiado al portapapeles');
+    }
     </script>
 </body>
-
 </html>

@@ -53,13 +53,13 @@
                     Enviar Correo Contacto
                     <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
-                <a data-tooltip-target="tooltip-cancelar" href="{{ route('inicio') }}"
-                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" title="Cancelar">
-                    <i class="fas fa-backward"></i> Cancelar
+                <a data-tooltip-target="tooltip-volver" href="{{ route('inicio') }}"
+                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" title="Volver">
+                    <i class="fas fa-backward"></i> Volver
                 </a>
-                <div id="tooltip-cancelar" role="tooltip"
+                <div id="tooltip-volver" role="tooltip"
                     class="max-sm:hidden absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                    Cancelar
+                    Volver
                     <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
             </div>

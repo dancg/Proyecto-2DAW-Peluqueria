@@ -12,7 +12,8 @@ use App\Models\Article;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\{File,Hash};
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,9 +37,6 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        //Este problema me surge cuando pongo una foto de perfil, con esta línea me borra la
-        // carpeta temporal cada vez que entre a dashboard
-        File::deleteDirectory(storage_path('app/public/livewire-tmp'));
         return view('dashboard');
     })->name('dashboard');
     Route::get('/articles', ShowArticles::class)->name('articulos.show');
@@ -69,27 +67,50 @@ Route::get('/login-google', function () {
 });
 
 Route::get('/google-callback', function () {
-    $user = Socialite::driver('google')->user();
+    // Realizo un try-catch para comprobar que el usuario se halla logueado anteriormente con Google
+    try{
+        $user = Socialite::driver('google')->user();
+    }catch(\Exception $e){
+        return redirect('/dashboard')->with('error', 'Fallo con conexión a Google');
+    }
     //Creamos una variable para comprobar si existe el usuario
     $userExists = User::where('external_id', $user->id)
         ->where('external_auth', 'google')
         ->first();
-
+    
     //Si el usuario ya existe le hacemos login, si no, lo creamos cogiendo los campos que da Google
     if ($userExists) {
         Auth::login($userExists);
     } else {
-        $newUser = User::create([
-            'name' => $user->name,
-            'email' => $user->email,
-            'avatar' => $user->avatar,
-            'external_id' => $user->id,
-            'external_auth' => 'google',
-        ]);
+        // Si el usuario no esta creado, primero comprueba si existe el email en la base de datos,
+        // si no existe el email crea todo el usuario, si el email existe reemplaza los valores del usuario
+        // en relación a Google Auth
+        if(User::where('email',$user->email)->count()){
+            dd('encontrado');
+            $newUser = User::update([
+                'avatar' => $user->avatar,
+                'external_id' => $user->id,
+                'external_auth' => 'google',
+                'email_verified_at' => now(),
+            ]);
+        } else {
+            $pass = Str::random(16);
+            
+            $newUser = User::create([
+                'name' => $user->name,
+                'email' => $user->email,
+                'password' => Hash::make($pass),
+                'avatar' => $user->avatar,
+                'external_id' => $user->id,
+                'external_auth' => 'google',
+                'email_verified_at' => now(),
+            ]);
+            //Al crearlo hacemos login
+            Auth::login($newUser);
+            return redirect('/dashboard')->with('login',$pass);
+        }
         //Al crearlo hacemos login
         Auth::login($newUser);
     }
-    // $user->token
-
     return redirect('/dashboard');
 });
