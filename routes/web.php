@@ -29,6 +29,9 @@ use Illuminate\Support\Str;
 Route::get('/', function () {
     return view('welcome');
 })->name('inicio');
+Route::get('/dashboard', function () {
+    return redirect()->route('inicio');
+})->name('dashboard');
 
 //En este middleware entrará cualquier usuario autenticado
 Route::middleware([
@@ -36,10 +39,8 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
     Route::get('/articles', ShowArticles::class)->name('articulos.show');
+    Route::get('/marcas', ShowMarcas::class)->name('marcas.show');
     Route::get('/citas', ShowCitas::class)->name('citas.show');
     // Rutas del carro
     Route::resource('/carro', CarroController::class);
@@ -54,7 +55,6 @@ Route::middleware([
     'is_admin'
 ])->group(function () {
     Route::get('/categories', ShowCategories::class)->name('categorias.show');
-    Route::get('/marcas', ShowMarcas::class)->name('marcas.show');
 });
 
 //Rutas para formulario de contacto

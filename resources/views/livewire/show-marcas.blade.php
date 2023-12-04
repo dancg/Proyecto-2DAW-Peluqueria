@@ -14,18 +14,6 @@
                 <li class="mx-2">
                     <i class="fa-solid fa-chevron-right "></i>
                 </li>
-                <li class="flex items-center">
-                    <a data-tooltip-target="tooltip-dashboard" href="{{ route('dashboard') }}"
-                        class="hover:text-blue-700 text-blue-900" title="Ir a Dashboard">Dashboard</a>
-                    <div id="tooltip-dashboard" role="tooltip"
-                        class="max-sm:hidden absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                        Ir a Dashboard
-                        <div class="tooltip-arrow" data-popper-arrow></div>
-                    </div>
-                </li>
-                <li class="mx-2">
-                    <i class="fa-solid fa-chevron-right "></i>
-                </li>
                 <li class="flex items-center">Marcas</li>
             </ol>
         </nav>
@@ -33,11 +21,14 @@
             <div class="flex-1">
                 <x-input class="w-full" type="search" placeholder="Buscar..." wire:model="buscar"></x-input>
             </div>
-            <div>
-                @livewire('create-marcas')
-            </div>
+            @if (auth()->user()->is_admin)
+                <div>
+                    @livewire('create-marcas')
+                </div>
+            @endif
         </article>
         @if ($marcas->count())
+            @if (auth()->user()->is_admin)
             <article class="flex flex-wrap justify-around">
                 @foreach ($marcas as $item)
                     <div
@@ -74,6 +65,22 @@
                     </div>
                 @endforeach
             </article>
+        @else
+            <article class="flex flex-wrap justify-around">
+                @foreach ($marcas as $item)
+                    <div
+                        class="flex flex-col my-2 w-full items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800">
+                        <img class="object-cover w-full rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
+                            src="{{ Storage::url($item->imagen) }}" alt="imagen de {{ $item->nombre }}">
+                        <div class="flex flex-col justify-between p-4 leading-normal">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                {{ $item->nombre }}</h5>
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $item->descripcion }}</p>
+                        </div>
+                    </div>
+                @endforeach
+            </article>
+        @endif
             <div class="mt-2">
                 {{ $marcas->links() }}
             </div>

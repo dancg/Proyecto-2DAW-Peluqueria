@@ -15,18 +15,6 @@
                     <i class="fa-solid fa-chevron-right "></i>
                 </li>
                 @auth
-                    <li class="flex items-center">
-                        <a data-tooltip-target="tooltip-dashboard" href="{{ route('dashboard') }}"
-                            class="hover:text-blue-700 text-blue-900" title="Ir a Dashboard">Dashboard</a>
-                        <div id="tooltip-dashboard" role="tooltip"
-                            class="max-sm:hidden absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                            Ir a Dashboard
-                            <div class="tooltip-arrow" data-popper-arrow></div>
-                        </div>
-                    </li>
-                    <li class="mx-2">
-                        <i class="fa-solid fa-chevron-right "></i>
-                    </li>
                 @endauth
                 <li class="flex items-center">Contáctanos</li>
             </ol>

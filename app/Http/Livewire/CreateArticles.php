@@ -65,9 +65,6 @@ class CreateArticles extends Component
             'category_id'=>$this->category_id,
             'marca_id'=>$this->marca_id
         ]);
-        // Cuando creo un artículo me aparece una carpeta temporal que no se borra,
-        // utilizo esta línea para borrarlo
-        File::deleteDirectory(storage_path('app/public/livewire-tmp'));
 
         $this->reset(["openCrear","nombre","descripcion","disponible","precio","stock",
         "imagen","category_id","marca_id"]);

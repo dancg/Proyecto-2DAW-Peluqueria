@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 dark:bg-black dark:text-white">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 dark:bg-gray-800 dark:text-white">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -12,20 +12,32 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @auth
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" title="Dashboard">
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" title="Inicio">
                             <i class="fa-solid fa-house"></i>
                         </x-nav-link>
                         @if (auth()->user()->is_admin)
                             <x-nav-link :href="route('categorias.show')" :active="request()->routeIs('categorias.show')" title="Gestionar Categorías">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </x-nav-link>
-                            <x-nav-link :href="route('marcas.show')" :active="request()->routeIs('marcas.show')" title="Gestionar Marcas">
-                                <i class="fa-solid fa-briefcase"></i>
-                            </x-nav-link>
                         @endif
+                        @if (auth()->user()->is_admin)
+                        <x-nav-link :href="route('marcas.show')" :active="request()->routeIs('marcas.show')" title="Gestionar Marcas">
+                            <i class="fa-solid fa-briefcase"></i>
+                        </x-nav-link>
+                        @else
+                        <x-nav-link :href="route('marcas.show')" :active="request()->routeIs('marcas.show')" title="Ver Marcas">
+                            <i class="fa-solid fa-briefcase"></i>
+                        </x-nav-link>
+                        @endif
+                        @if (auth()->user()->is_admin)
                         <x-nav-link :href="route('articulos.show')" :active="request()->routeIs('articulos.show')" title="Gestionar Artículos">
                             <i class="fa-solid fa-tags"></i>
                         </x-nav-link>
+                        @else
+                        <x-nav-link :href="route('articulos.show')" :active="request()->routeIs('articulos.show')" title="Ver Artículos">
+                            <i class="fa-solid fa-tags"></i>
+                        </x-nav-link>
+                        @endif
                         <x-nav-link :href="route('citas.show')" :active="request()->routeIs('citas.show')" title="Gestionar Citas">
                             <i class="fa-solid fa-address-book"></i>
                         </x-nav-link>
@@ -129,18 +141,26 @@
         <div class="pt-2 pb-3 space-y-1">
             @auth
                 <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    <i class="fa-solid fa-house"></i> Dashboard
+                    <i class="fa-solid fa-house"></i> Inicio
                 </x-responsive-nav-link>
                 @if (auth()->user()->is_admin)
                     <x-responsive-nav-link :href="route('categorias.show')" :active="request()->routeIs('categorias.show')">
                         <i class="fa-solid fa-magnifying-glass"></i> Gestionar Categorías
                     </x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('marcas.show')" :active="request()->routeIs('marcas.show')">
-                        <i class="fa-solid fa-briefcase"></i> Gestionar Marcas
-                    </x-responsive-nav-link>
                 @endif
+                <x-responsive-nav-link :href="route('marcas.show')" :active="request()->routeIs('marcas.show')">
+                @if (auth()->user()->is_admin)
+                    <i class="fa-solid fa-briefcase"></i> Gestionar Marcas
+                @else
+                    <i class="fa-solid fa-briefcase"></i> Ver Marcas
+                @endif
+                </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('articulos.show')" :active="request()->routeIs('articulos.show')">
+                @if (auth()->user()->is_admin)
                     <i class="fa-solid fa-tags"></i> Gestionar Artículos
+                @else
+                    <i class="fa-solid fa-tags"></i> Ver Artículos
+                @endif
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('citas.show')" :active="request()->routeIs('citas.show')">
                     <i class="fa-solid fa-address-book"></i> Gestionar Citas
