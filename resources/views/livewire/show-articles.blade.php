@@ -133,7 +133,7 @@
                                         <button data-tooltip-target="tooltip-eliminarArticuloCarro"
                                             wire:click="eliminarArticuloCarro('{{ $item->id }}')"
                                             wire:loading.attr="disabled" title="Quitar Artículo Del Carro">
-                                            <i class="fas fa-minus text-red-600"></i>
+                                            <i class="fas fa-xmark text-xl text-red-600"></i>
                                         </button>
                                         <div id="tooltip-eliminarArticuloCarro" role="tooltip"
                                             class="max-sm:hidden absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
@@ -145,7 +145,7 @@
                                             <button data-tooltip-target="tooltip-anadirArticuloCarro"
                                                 wire:click="ponerEnCarro('{{ $item->id }}')"
                                                 wire:loading.attr="disabled" title="Añadir Artículo al Carro">
-                                                <i class="fas fa-add text-blue-600"></i>
+                                                <i class="fa-solid fa-cart-arrow-down text-blue-600"></i></i>
                                             </button>
                                             <div id="tooltip-anadirArticuloCarro" role="tooltip"
                                                 class="max-sm:hidden absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">

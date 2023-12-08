@@ -14,23 +14,11 @@
                 <li class="mx-2">
                     <i class="fa-solid fa-chevron-right "></i>
                 </li>
-                <li class="flex items-center">
-                    <a data-tooltip-target="tooltip-dashboard" href="{{ route('dashboard') }}"
-                        class="hover:text-blue-700 text-blue-900" title="Ir a Dashboard">Dashboard</a>
-                    <div id="tooltip-dashboard" role="tooltip"
-                        class="max-sm:hidden absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                        Ir a Dashboard
-                        <div class="tooltip-arrow" data-popper-arrow></div>
-                    </div>
-                </li>
-                <li class="mx-2">
-                    <i class="fa-solid fa-chevron-right "></i>
-                </li>
                 <li class="flex items-center">Carro</li>
             </ol>
         </nav>
-        <div class="flex flex-row-reverse mx-6 my-auto">
-            <a href="{{ route('articulos.show') }}" class="max-sm:mx-auto">
+        <div class="grid grid-cols-3 justify-between">
+            <a href="{{ route('articulos.show') }}" class="text-center max-sm:mx-auto">
                 <button data-tooltip-target="tooltip-articulos"
                     class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" title="Ir a Artículos">
                     <i class="fa-solid fa-tags"></i><span class="max-sm:hidden"> Ir a Artículos</span>
@@ -41,6 +29,26 @@
                     <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
             </a>
+            <div class="text-center text-xl">
+                <div>
+                    Total: {{ $totalCarro }} €
+                </div>
+            </div>
+            <div class="text-center">
+                <form action="{{ route('carro.clear') }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button data-tooltip-target="tooltip-clear" type="submit" 
+                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" title="Eliminar Carro">
+                        <i class="fa-solid fa-trash"></i><span class="max-sm:hidden"> Eliminar Carro</span>
+                    </button>
+                    <div id="tooltip-clear" role="tooltip"
+                        class="max-sm:hidden absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                        Eliminar Carro
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                </form>
+            </div>
         </div>
         @if ($carro->count())
             <div class="flex flex-wrap">
@@ -57,8 +65,9 @@
                                     @csrf
                                     @method('PUT')
                                     <input type="hidden" name="id" value="{{ $item->id }}">
-                                    <input type="number" min="1" max="{{ $item->article->stock + $item->cantidad }}"
-                                        name="cantidad" value="{{ $item->cantidad }}"
+                                    <input type="number" min="1"
+                                        max="{{ $item->article->stock + $item->cantidad }}" name="cantidad"
+                                        value="{{ $item->cantidad }}"
                                         class="w-16 text-center h-6 text-gray-800 outline-none rounded border border-blue-600" />
                                     <button data-tooltip-target="tooltip-editar" title="Editar Cantidad"
                                         class="px-4 mt-1 ml-2 py-1.5 text-sm rounded shadow text-violet-100 bg-violet-500">
@@ -76,7 +85,7 @@
                                         @method('DELETE')
                                         <button data-tooltip-target="tooltip-borrar" type="submit"
                                             title="Quitar Artículo">
-                                            <i class="fas fa-trash text-red-600"></i>
+                                            <i class="fas fa-xmark text-xl text-red-600"></i>
                                         </button>
                                         <div id="tooltip-borrar" role="tooltip"
                                             class="max-sm:hidden absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
@@ -93,25 +102,6 @@
                         </div>
                     </div>
                 @endforeach
-            </div>
-            <div class="flex flex-wrap justify-between mx-2">
-                <div class="flex flex-col">
-                    Total del carro: {{ $totalCarro }} €
-                </div>
-                <div class="flex flex-col">
-                    <form action="{{ route('carro.clear') }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button data-tooltip-target="tooltip-clear" type="submit" title="Eliminar Carro Completo">
-                            <i class="fa-solid fa-dumpster text-red-600"></i>
-                        </button>
-                        <div id="tooltip-clear" role="tooltip"
-                            class="max-sm:hidden absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                            Eliminar Carro Completo
-                            <div class="tooltip-arrow" data-popper-arrow></div>
-                        </div>
-                    </form>
-                </div>
             </div>
             <div class="mt-2">
                 {{ $carro->links() }}

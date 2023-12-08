@@ -86,13 +86,13 @@ Route::get('/google-callback', function () {
         // si no existe el email crea todo el usuario, si el email existe reemplaza los valores del usuario
         // en relación a Google Auth
         if(User::where('email',$user->email)->count()){
-            dd('encontrado');
-            $newUser = User::update([
-                'avatar' => $user->avatar,
+            User::where('email',$user->email)->update([
                 'external_id' => $user->id,
                 'external_auth' => 'google',
                 'email_verified_at' => now(),
             ]);
+            $newUser=User::where('email',$user->email)->first();
+            Auth::login($newUser);
         } else {
             $pass = Str::random(16);
             

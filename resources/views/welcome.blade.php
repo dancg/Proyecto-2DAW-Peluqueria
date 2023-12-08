@@ -133,10 +133,41 @@
                 </article>
             @else
                 <section class="grid grid-cols-2">
-                    <div>Marcas</div>
-                    <div>Artículos</div>
-                    <div>Citas</div>
-                    <div>Correo de Contacto</div>
+                    <div class="relative h-48 bg-auto bg-cover bg-center bg-no-repeat border border-double border-4 border-blue-500"
+                        style="background-image: url({{ Storage::url('pantenep.png') }})">
+                        <p class="text-2xl">Marcas</p>
+                        <a class="absolute inset-x-0 bottom-0 text-blue-600 hover:text-gray-900 cursor-pointer"
+                            href="{{ route('marcas.show') }}" title="Ver Marcas">
+                            <i class="fa-solid fa-briefcase fa-2x"></i>
+                        </a>
+                    </div>
+                    <div class="relative h-48 bg-auto bg-cover bg-center bg-no-repeat border border-double border-4 border-red-500"
+                        style="background-image: url({{ Storage::url('planchap.webp') }})">
+                        <p class="text-2xl">Artículos</p>
+                        <a class="absolute absolute inset-x-0 bottom-0 text-blue-600 hover:text-gray-900 cursor-pointer"
+                            href="{{ route('articulos.show') }}" title="Ver Artículos">
+                            <i class="fa-solid fa-tags fa-2x"></i>
+                        </a>
+                    </div>
+                    <div class="relative h-48 bg-auto bg-cover bg-center bg-no-repeat border border-double border-4 border-green-500"
+                        style="background-image: url({{ Storage::url('citap.png') }})">
+                        <p class="text-white text-2xl">Citas</p>
+                        <a class="absolute inset-x-0 bottom-0 text-blue-600 hover:text-gray-900 cursor-pointer"
+                            href="{{ route('citas.show') }}" title="Gestionar Citas">
+                            <i class="fa-solid fa-address-book fa-2x"></i>
+                        </a>
+                    </div>
+                    <div class="relative h-48 border border-double border-4 border-yellow-500">
+                        <p class="text-white text-2xl">Contacto</p>
+                        <p>Dir: C/ Memorias 87</p>
+                        <p>Tel: 669206657</p>
+                        <p>Correo de contacto:</p>
+                        <p>dadacrijo@gmail.com</p>
+                        <a class="absolute inset-x-0 bottom-0 text-blue-600 hover:text-gray-900 cursor-pointer"
+                            href="{{ route('contacto.pintar') }}" title="Contáctanos">
+                            <i class="fa-solid fa-envelope fa-2x"></i>
+                        </a>   
+                    </div>
                 </section>
             @endauth
         </main>
