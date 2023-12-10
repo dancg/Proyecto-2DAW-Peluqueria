@@ -17,7 +17,7 @@
                 <li class="flex items-center">Carro</li>
             </ol>
         </nav>
-        <div class="grid grid-cols-3 justify-between">
+        <div class="grid grid-cols-3 justify-between mb-4">
             <a href="{{ route('articulos.show') }}" class="text-center max-sm:mx-auto">
                 <button data-tooltip-target="tooltip-articulos"
                     class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" title="Ir a Artículos">

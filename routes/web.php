@@ -107,10 +107,10 @@ Route::get('/google-callback', function () {
             ]);
             //Al crearlo hacemos login
             Auth::login($newUser);
-            return redirect('/dashboard')->with('login',$pass);
+            return redirect()->route('inicio')->with('login',$pass);
         }
         //Al crearlo hacemos login
         Auth::login($newUser);
     }
-    return redirect('/dashboard');
+    return redirect()->route('inicio');
 });

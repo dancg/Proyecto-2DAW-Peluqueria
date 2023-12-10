@@ -64,38 +64,31 @@
         </main>
         <footer class="text-center">
             <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
-                <a data-tooltip-target="tooltip-proyecto" property="dct:title" rel="cc:attributionURL"
-                    href="https://github.com/dancg/Proyecto-2DAW-Peluqueria" class="hover:text-blue-700 text-blue-900"
-                    target="_blank">Peluquerias
-                    Dbarb</a> by 
-            <div id="tooltip-proyecto" role="tooltip"
-                class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                Ver Proyecto en GitHub
-                <div class="tooltip-arrow" data-popper-arrow></div>
-            </div>
-            <a data-tooltip-target="tooltip-autor" rel="cc:attributionURL dct:creator" property="cc:attributionName"
-                href="https://github.com/dancg" class="hover:text-blue-700 text-blue-900" target="_blank"> Daniel
-                Calatrava González</a>
-            <div id="tooltip-autor" role="tooltip"
-                class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                Ver Perfil Autor en GitHub
-                <div class="tooltip-arrow" data-popper-arrow></div>
-            </div>
-            is licensed under <a data-tooltip-target="tooltip-creativecommons"
-                class="flex flex-wrap justify-center items-center hover:text-blue-700 text-blue-900"
-                href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank"
-                rel="license noopener noreferrer"> Attribution 4.0
-                International
-                <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" class="flex"
-                    src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1">
-                <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" class="flex"
-                    src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1">
-            </a>
-            <div id="tooltip-creativecommons" role="tooltip"
-                class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                Ver Licencias en Creative Commons
-                <div class="tooltip-arrow" data-popper-arrow></div>
-            </div>
+                <a data-tooltip-target="tooltip-proyecto" property="dct:title" rel="cc:attributionURL" href="https://github.com/dancg/Proyecto-2DAW-Peluqueria"
+                    class="hover:text-blue-700 text-blue-900" target="_blank">Peluquerias Dbarb</a> by
+                <div id="tooltip-proyecto" role="tooltip" class="max-sm:hidden absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                    Ver Proyecto en GitHub
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+                <a data-tooltip-target="tooltip-autor" rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/dancg"
+                    class="hover:text-blue-700 text-blue-900" target="_blank"> Daniel Calatrava González</a>
+                <div id="tooltip-autor" role="tooltip" class="max-sm:hidden absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                    Ver Perfil Autor en GitHub
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+                is licensed under
+                <a data-tooltip-target="tooltip-creativecommons" class="flex justify-center hover:text-blue-700 text-blue-900" href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank"
+                    rel="license noopener noreferrer">
+                    Attribution 4.0 International
+                    <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"
+                        src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1">
+                    <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"
+                        src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1">
+                </a>
+                <div id="tooltip-creativecommons" role="tooltip" class="max-sm:hidden absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                    Ver Licencias en Creative Commons
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
             </p>
             <div class="h-6"></div>
         </footer>
@@ -114,7 +107,7 @@
                 timer: 1500
             })
         })
-        
+
         //Alerta de Categorías
         Livewire.on('permisoBorrar', categoryId => {
             Swal.fire({
@@ -128,11 +121,11 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     Livewire.emitTo('show-categories', 'borrarCategory', categoryId)
-                // Esta parte es necesaria para que mantenga la forma del datatable, ya que si
-                // no está puesto se deforma la tabla y habría que recargar la página para arreglarlo.
-                }else {
+                    // Esta parte es necesaria para que mantenga la forma del datatable, ya que si
+                    // no está puesto se deforma la tabla y habría que recargar la página para arreglarlo.
+                } else {
                     var cancelar = document.createElement("a");
-                    cancelar.href = "{{route('categorias.show')}}";
+                    cancelar.href = "{{ route('categorias.show') }}";
                     cancelar.click();
                 }
             })
@@ -185,11 +178,11 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     Livewire.emitTo('show-citas', 'borrarCita', citaId)
-                // Esta parte es necesaria para que mantenga la forma del datatable, ya que si
-                // no está puesto se deforma la tabla y habría que recargar la página para arreglarlo.
-                }else {
+                    // Esta parte es necesaria para que mantenga la forma del datatable, ya que si
+                    // no está puesto se deforma la tabla y habría que recargar la página para arreglarlo.
+                } else {
                     var cancelar = document.createElement("a");
-                    cancelar.href = "{{route('citas.show')}}";
+                    cancelar.href = "{{ route('citas.show') }}";
                     cancelar.click();
                 }
             })
@@ -220,23 +213,24 @@
         @if (session('login'))
             Swal.fire({
                 icon: 'info',
-                title: "Su contraseña creada es: <br><i class='fa-solid fa-clipboard cursor-pointer mr-1' id='clipboard' onclick=\"copy(this, '{{session('login')}}')\"></i>{{ session('login') }}",
-                text: 'Este mensaje solo se mostrará una vez, cópialo en algún sitio',
+                title: "Su contraseña creada es: <br><i class='fa-solid fa-clipboard cursor-pointer mr-1' id='clipboard' onclick=\"copy(this, '{{ session('login') }}')\"></i>{{ session('login') }}",
+                text: 'Este mensaje solo se mostrará una vez, pulse el icono de portapapeles para copiarlo, ve al perfil arriba a la derecha y modifíquelo',
                 showConfirmButton: true,
             })
         @endif
     </script>
     <script>
         // Función copy para copiar contraseña
-    function copy(element, pass) {
-        const textarea = document.createElement('textarea');
-        textarea.value = pass;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-        console.log('Contenido copiado al portapapeles');
-    }
+        function copy(element, pass) {
+            const textarea = document.createElement('textarea');
+            textarea.value = pass;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            console.log('Contenido copiado al portapapeles');
+        }
     </script>
 </body>
+
 </html>
