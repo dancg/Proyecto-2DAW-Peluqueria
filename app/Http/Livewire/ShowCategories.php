@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Category;
+use App\Models\{Category,Article};
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Storage;
 
 class ShowCategories extends Component
 {
@@ -27,6 +28,11 @@ class ShowCategories extends Component
     }
 
     public function borrar(Category $category){
+        //Cojo todos los artículos relacionados con la categoría y borro las imágenes de los artículos
+        $articulos = Article::where("category_id", $category->id)->get();
+        foreach($articulos as $item){
+            Storage::delete($item->imagen);
+        }
         //Borramos el registro de la base de datos
         $category->delete();
         //Emitimos un mensaje y retornamos a la página de categorías

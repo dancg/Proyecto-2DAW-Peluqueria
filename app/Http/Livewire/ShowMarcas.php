@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Marca;
+use App\Models\{Marca,Article};
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Storage;
@@ -46,6 +46,11 @@ class ShowMarcas extends Component
     public function borrar(Marca $marca){
         //Borramos la imagen
         Storage::delete($marca->imagen);
+        //Cojo todos los artículos relacionados con la marca y borro las imágenes de los artículos
+        $articulos = Article::where("marca_id", $marca->id)->get();
+        foreach($articulos as $item){
+            Storage::delete($item->imagen);
+        }
         //Borramos el registro de la base de datos
         $marca->delete();
         //Emitimos un mensaje y retornamos a la página de marcas
