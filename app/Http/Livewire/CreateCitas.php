@@ -54,7 +54,7 @@ class CreateCitas extends Component
             'tipo'=>$this->tipo,
             'user_id'=>auth()->user()->id
         ]);
-        return redirect()->route("citas.show")->with("info", "Categoría Creada");
+        return redirect()->route("citas.show")->with("info", "Cita Creada");
     }
 
     // Función para cerrar la ventana modal si se pulsa el botón cancelar
